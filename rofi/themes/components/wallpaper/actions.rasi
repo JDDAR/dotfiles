@@ -1,0 +1,167 @@
+@import "shared/colors.rasi"
+@import "shared/fonts.rasi"
+
+* {
+    border-colour:                  var(selected-two);
+    handle-colour:                  var(selected);
+    background-colour:              var(background);
+    foreground-colour:              var(foreground);
+    alternate-background:           var(selected-two);
+    normal-background:              var(background);
+    normal-foreground:              var(foreground);
+    urgent-background:              var(urgent);
+    urgent-foreground:              var(background);
+    active-background:              var(active);
+    active-foreground:              var(background);
+    selected-normal-background:     var(selected);
+    selected-normal-foreground:     var(background);
+    selected-urgent-background:     var(active);
+    selected-urgent-foreground:     var(background);
+    selected-active-background:     var(urgent);
+    selected-active-foreground:     var(background);
+    alternate-normal-background:    var(background);
+    alternate-normal-foreground:    var(foreground);
+    alternate-urgent-background:    var(urgent);
+    alternate-urgent-foreground:    var(background);
+    alternate-active-background:    var(active);
+    alternate-active-foreground:    var(background);
+}
+
+configuration {
+    show-icons:                     true; /* Asegúrate de que esto sea 'true' */
+    disable-history:                true;
+    icon-theme:                     ""; /* Deja esto vacío para que Rofi use los íconos pasados directamente */
+    display-dmenu:                  " ";
+    sidebar-mode:                   false;
+    hover-select:                   true;
+}
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                   "real";
+    location:                       center;
+    anchor:                         center;
+    fullscreen:                     false;
+    width:                          800px;
+    height:                         200px;
+    x-offset:                       0px;
+    y-offset:                       0px;
+    enabled:                        true;
+    margin:                         0px;
+    padding:                        0px;
+    border:                         1px solid;
+    border-radius:                  12px;
+    border-color:                   white / 5%;
+    cursor:                         "default";
+    background-color:               @background-colour;
+    text-color:                     @foreground-colour;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                        true;
+    spacing:                        0px;
+    margin:                         0px;
+    padding:                        0px;
+    border:                         0px solid;
+    border-radius:                  0px;
+    border-color:                   @border-colour;
+    background-color:               transparent;
+    children:                       [ "inputbar", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                        true;
+    spacing:                        0px;
+    margin:                         0px;
+    padding:                        20px;
+    border:                         0px 0px 1px 0px;
+    border-radius:                  12px 12px 0px 0px;
+    border-color:                   white / 10%;
+    background-color:               rgba(255, 255, 255, 0.03);
+    text-color:                     @foreground-colour;
+    children:                       [ "prompt" ];
+}
+
+prompt {
+    enabled:                        true;
+    background-color:               transparent;
+    text-color:                     @foreground-colour;
+    font:                           "JetBrains Mono Bold 12";
+    padding:                        0px;
+    horizontal-align:               0.5;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                        true;
+    columns:                        4;      /* 4 columnas horizontales */
+    lines:                          1;      /* 1 fila */
+    cycle:                          true;
+    dynamic:                        false;
+    scrollbar:                      false;
+    layout:                         horizontal; /* Esto es clave para que los elementos se muestren uno al lado del otro */
+    reverse:                        false;
+    fixed-height:                   true;
+    fixed-columns:                  true;
+
+    spacing:                        15px;   /* Espacio entre elementos */
+    margin:                         0px;
+    padding:                        20px;
+    border:                         0px solid;
+    border-radius:                  0px;
+    border-color:                   @border-colour;
+    background-color:               transparent;
+    text-color:                     @foreground-colour;
+    cursor:                         "default";
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                        true;
+    spacing:                        5px;    /* Espacio entre icono y texto */
+    margin:                         0px;
+    padding:                        15px 10px;
+    border:                         1px solid;
+    border-radius:                  8px;
+    border-color:                   transparent;
+    background-color:               rgba(255, 255, 255, 0.03);
+    text-color:                     @foreground-colour;
+    orientation:                    vertical; /* Esto asegura que el icono y el texto estén uno encima del otro */
+    cursor:                         pointer;
+}
+
+element normal.normal {
+    background-color:               @normal-background; /* Cambié 'red' para usar tu variable */
+    text-color:                     @foreground-colour;
+    border-color:                   transparent;
+}
+
+element selected.normal {
+    background-color:               @selected-normal-background;
+    text-color:                     @selected-normal-foreground;
+    border-color:                   @selected-normal-background;
+}
+
+element-icon {
+    /* Eliminé background-color: red; ya que no es necesario y podría ocultar el icono si no es transparente */
+    text-color:                     inherit;
+    size:                           50px; /* Tamaño del icono */
+    cursor:                         inherit;
+    horizontal-align:               0.5; /* Centra horizontalmente el icono */
+    vertical-align:                 0.5; /* Centra verticalmente el icono dentro de su espacio */
+    /* Eliminé border: 1px solid; para no tener un borde alrededor del icono */
+    margin:                         0px 0px 5px 0px; /* Pequeño margen debajo del icono para separarlo del texto */
+}
+
+element-text {
+    background-color:               transparent;
+    text-color:                     inherit;
+    highlight:                      inherit;
+    cursor:                         inherit;
+    vertical-align:                 0.5;
+    horizontal-align:               0.5; /* Centra horizontalmente el texto */
+    font:                           "JetBrains Mono 9";
+    margin:                         0px;
+}

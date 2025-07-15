@@ -1,0 +1,59 @@
+/*
+ * Paleta moderna y tecnológica optimizada para blur y transparencias
+ * Compatible con picom dual_kawase blur
+ */
+
+* {
+    /* ----- COLORES BASE ----- */
+    background:     #0F1419FF;  // Antracita profundo con toque azulado
+    background-alt: #1A1F2EFF;  // Superficie elevada, más clara
+    foreground:     #FFFFFFFF;  // Texto principal - blanco puro
+    
+    /* ----- ACENTOS PRINCIPALES ----- */
+    selected:       #00D4FFFF;  // Cyan tecnológico - elemento seleccionado
+    selected-two:   #0EA5E9FF;  // Azul cielo - bordes y divisores
+    
+    /* ----- ESTADOS SEMÁNTICOS ----- */
+    active:         #10B981FF;  // Verde menta - estado activo/éxito
+    urgent:         #EF4444FF;  // Rojo coral - urgente/error
+    
+    /* ----- COLORES ADICIONALES PARA MEJOR UX ----- */
+    // Texto secundario y elementos menos prominentes
+    foreground-alt:    #B8BCC8FF;  // Gris claro para jerarquía
+    foreground-dim:    #6B7280FF;  // Gris medio para texto deshabilitado
+    
+    // Superficies adicionales
+    surface:           #242938FF;  // Superficie principal
+    surface-secondary: #2A2F3EFF;  // Superficie menos prominente
+    
+    // Bordes y divisores
+    border:            #374151FF;  // Borde principal
+    border-active:     #00D4FF40;  // Borde activo con transparencia
+    divider:           #1F2937FF;  // Divisor sutil
+    
+    // Estados de hover y interacción
+    selected-hover:    #0284C7FF;  // Hover state más sutil
+    
+    // Colores semánticos adicionales
+    warning:           #F59E0BFF;  // Ámbar para advertencias
+    info:              #8B5CF6FF;  // Púrpura para información
+    
+    // Overlays y efectos
+    overlay:           #000000CC;  // Overlay oscuro
+    shadow:            #000000AA;  // Sombra para elementos elevados
+    backdrop:          #0F141999;  // Backdrop con blur
+    
+    /* ----- VARIANTES OPTIMIZADAS PARA BLUR ----- */
+    // Estas variantes funcionan mejor con picom blur
+    surface-blur:      #242938E6;  // 90% opacidad - superficie con blur
+    selected-blur:     #00D4FFE6;  // 90% opacidad - selección con blur
+    overlay-blur:      #0F1419CC;  // 80% opacidad - overlay con blur
+    
+    /* ----- COLORES PARA SYNTAX HIGHLIGHTING ----- */
+    // Útiles si usas Rofi para mostrar código o terminal
+    syntax-keyword:    #FF79C6FF;  // Rosa para keywords
+    syntax-string:     #50FA7BFF;  // Verde para strings
+    syntax-comment:    #6272A4FF;  // Gris azulado para comentarios
+    syntax-function:   #8BE9FDFF;  // Cyan para funciones
+    syntax-variable:   #FFB86CFF;  // Naranja para variables
+}

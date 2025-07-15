@@ -1,0 +1,6 @@
+configuration {
+    modi: "drun,run";
+    show-icons: true;
+    display-drun: " Apps";
+    drun-display-format: "{name}";
+}

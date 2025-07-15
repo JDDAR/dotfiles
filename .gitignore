@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Qtile specific
+qtile.log
+.qtile_log
+
+# Rofi
+rofi.log
+
+# Backup files
+*.bak
+*.backup
+*~
+*.swp
+*.swo
+*.tmp
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Personal files (puedes agregar más según necesites)
+personal_notes.txt
+todo.txt
+secrets/
+
+# Cache directories
+.cache/
+cache/
+
+# Logs
+*.log
+logs/

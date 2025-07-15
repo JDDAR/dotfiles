@@ -1,0 +1,173 @@
+@import "shared/colors.rasi"
+@import "shared/fonts.rasi"
+
+* {
+    background-colour:           transparent;
+    foreground-colour:           var(foreground);
+    selected-normal-background:  var(selected);
+    selected-normal-foreground:  var(background);
+    border-colour:               white / 10%;
+    separatorcolor:              white / 15%;
+}
+
+configuration {
+    show-icons:         true;
+    disable-history:    true;
+    icon-theme:        "Papirus";
+    display-dmenu:     " ";
+    sidebar-mode:      false;
+    hover-select:      true;
+}
+
+window {
+    transparency:                "real";
+    location:                    east;
+    anchor:                      east;
+    fullscreen:                  false;
+    width:                       700px;
+    height:                      100%;
+    
+    x-offset:                    0px;
+    y-offset:                    0px;
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      1px solid;
+    border-radius:               3px;
+    border-color:                @border-colour;
+    cursor:                      "default";
+    background-color:            @background-colour;
+    text-color:                  @foreground-colour;
+}
+
+mainbox {
+    children:         [ "inputbar", "listview" ];
+    spacing:          0px;
+    padding:          0px;
+    background-color: transparent;
+}
+
+/* Barra de entrada con botones de acción */
+inputbar {
+    enabled:          true;
+    spacing:          0px;
+    margin:           0px;
+    padding:          0px;
+    border:           0px 0px 1px 0px;
+    border-radius:    3px 3px 0px 0px;
+    border-color:     @separatorcolor;
+    background-color:  transparent;
+    text-color:       white / 50%;
+    children:         [ "prompt", "textbox-prompt-colon", "entry", "case-indicator" ];
+}
+
+prompt {
+    enabled:          true;
+    background-color: transparent;
+    text-color:       @foreground-colour;
+    font:             "JetBrains Mono Bold 11";
+}
+
+textbox-prompt-colon {
+    enabled:          false;
+}
+
+entry {
+    enabled:          false;
+}
+
+case-indicator {
+    enabled:          false;
+}
+
+listview {
+    columns:          3;
+    lines:            0; 
+    spacing:          25px;
+    padding:          25px;
+    cycle:            true;
+    dynamic:          true;
+    layout:           vertical;
+    background-color: transparent;
+    border:           0px;
+    scrollbar:        false;
+    fixed-height:     false;  /* Permite altura dinámica */
+    fixed-columns:    true;   /* Mantiene 3 columnas fijas */
+}
+
+element {
+    border-radius:    3px;
+    padding:          0px;  
+    background-color: transparent;
+    cursor:           "pointer";
+    orientation:      vertical;
+    border:           1px solid;
+    border-color:     white / 5%;
+}
+
+element normal.normal {
+    background-color: transparent;
+    border-color:     white / 5%;
+}
+
+element selected.normal {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+    border-radius:    3px;  
+}
+
+element alternate.normal {
+    background-color: transparent;
+    border-color:     @item-border-colour;
+}
+
+element-icon {
+    size:               300px 200px;
+    horizontal-align:   0.5;
+    vertical-align:     0.5;
+    background-color:   transparent;
+    border-radius:      3px;
+    border:             0px solid;
+    cursor:             "pointer";
+}
+
+element-text {
+    enabled:            false;  /* Deshabilitamos completamente el texto */
+    expand:             false;
+    horizontal-align:   0.5;
+    vertical-align:     0.5;
+    margin:             0px;
+    background-color:   transparent;
+    text-color:         transparent;  /* Texto transparente por si acaso */
+    font:               "JetBrains Mono 0";  /* Tamaño 0 */
+}
+
+element selected.normal element-text {
+    text-color: @selected-normal-foreground;
+}
+
+/* Estilos para acciones (diferenciadas) */
+element.action {
+    background-color: transparent;
+    border:           0px solid;
+    border-color:     @border-colour;
+    border-radius:    3px;
+}
+
+element.action selected.normal {
+    background-color: @selected-normal-background;
+    border-color:     @selected-normal-background;
+}
+
+/* Mejoras para la visualización */
+scrollbar {
+    width:        4px;
+    border:       0px;
+    handle-color: @border-colour;
+    handle-width: 3px;
+    padding:      0px;
+}
+
+inputbar {
+    enabled:   false;
+}
