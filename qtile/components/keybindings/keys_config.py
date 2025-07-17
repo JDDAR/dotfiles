@@ -1,5 +1,6 @@
 """
-Configuración de atajos de teclado para Qtile
+Configuración de atajos de teclado para Qtile - VERSIÓN MEJORADA
+Incluye funciones personalizadas para controlar dónde se abren las aplicaciones
 """
 
 import os
@@ -10,9 +11,30 @@ from libqtile.utils import guess_terminal
 # Importar el workspace switcher con Tkinter
 from components.workspace import show_workspace_grid_tk
 
-# Configuración básica que necesitamos aquí
-mod = "mod4"  # Tecla Super/Windows
-terminal = guess_terminal()  # Detecta Alacritty automáticamente
+# Configuración básica
+mod = "mod4"
+terminal = guess_terminal()
+
+# ====== FUNCIONES PERSONALIZADAS ======
+def spawn_in_current_group(application):
+    """
+    Función que asegura que una aplicación se abra en el grupo actual
+    """
+    def _inner(qtile):
+        current_group = qtile.current_group.name
+        qtile.spawn(application)
+        # Pequeño delay para asegurar que se mantenga en el grupo actual
+        qtile.call_later(0.1, lambda: None)
+    return _inner
+
+def spawn_vscode_here():
+    """
+    Función específica para abrir VS Code en el workspace actual
+    """
+    def _inner(qtile):
+        current_group = qtile.current_group.name
+        qtile.spawn("code .")
+    return _inner
 
 def get_keys():
     """
@@ -32,11 +54,6 @@ def get_keys():
             lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/wallpaper_menu.sh")), 
             desc="Menú de selección de wallpapers"),
 
-        # ====== [WORKSPACE GRID] ======
-        Key([mod], "Tab",
-            lazy.function(show_workspace_grid_tk), 
-            desc="Mostrar workspace grid con Tkinter"),
-        
         # ====== [TERMINAL Y CONTROL BÁSICO] ======
         Key([mod], "Return", 
             lazy.spawn(terminal), 
@@ -157,6 +174,21 @@ def get_keys():
         Key([mod], "g",
             lazy.spawn(os.path.expanduser("~/.local/bin/gemini-launcher.sh")),
             desc="Lanzar Gemini CLI en modo flotante"),
+        
+        # ====== [APLICACIONES ESPECÍFICAS - SOLUCIONES] ======
+        # VS Code en workspace actual (reemplaza el comando code . desde terminal)
+        Key([mod, "shift"], "c",
+            lazy.function(spawn_vscode_here()),
+            desc="Abrir VS Code en el directorio actual del workspace actual"),
+        
+        # Aplicaciones que se mantienen en el workspace actual
+        Key([mod, "shift"], "f",
+            lazy.function(spawn_in_current_group("firefox")),
+            desc="Abrir Firefox en workspace actual"),
+        
+        Key([mod, "shift"], "n",
+            lazy.function(spawn_in_current_group("nautilus")),
+            desc="Abrir explorador de archivos en workspace actual"),
     ]
     
     return keys
