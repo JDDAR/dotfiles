@@ -5,6 +5,7 @@ Tema monocromático con Nerd Fonts
 
 from libqtile import bar, widget
 import os
+import subprocess
 
 # ====== [CONFIGURACIÓN DE COLORES MONOCROMÁTICO] ======
 class MonochromeScheme:
@@ -165,7 +166,7 @@ def create_right_widgets():
             font="Hack Nerd Font",
             fontsize=12,
             foreground=MonochromeScheme.ACCENT_NORMAL,
-            format="  {MemUsed:.1f}{mm}",  # nf-md-memory
+            format="  {MemUsed: .0f}{mm} ({MemPercent:.0f}%) ",  # nf-md-memory - Muestra usado y porcentaje
             update_interval=2.0,
             padding=6,
             mouse_callbacks={
@@ -224,19 +225,11 @@ def create_right_widgets():
         ),
         
         # Batería con ícono Nerd Font
-        widget.Battery(
+        widget.GenPollText(
+            func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/scripts/qtile-battery-status.sh")).decode("utf-8").strip(),
+            update_interval=5, # Actualiza cada 5 segundos para dinamismo
             font="Hack Nerd Font",
             fontsize=12,
-            foreground=MonochromeScheme.ACCENT_NORMAL,
-            format="{char} {percent:2.0%}",
-            charge_char="󰂄 ",      # nf-md-battery_charging
-            discharge_char="󱟢 ",   # nf-md-battery
-            full_char="󱈑 ",        # nf-md-battery
-            unknown_char="󰂑 ",     # nf-md-battery_unknown
-            empty_char="󱃍 ",       # nf-md-battery_outline
-            low_percentage=0.20,
-            low_foreground=MonochromeScheme.WARNING,
-            update_interval=60,
             padding=6,
             mouse_callbacks={
                 'Button1': lambda: os.system("xfce4-power-manager-settings")

@@ -57,6 +57,9 @@ def get_floating_layout():
         Match(wm_type="toolbar"),           # Barras de herramientas
         Match(wm_type="splash"),            # Pantallas de bienvenida
         Match(wm_type="dialog"),            # Diálogos
+
+        # ====== [GEMINI CLI MODAL] ======
+        Match(title="gemini-cli-window"),   # Nuestra ventana de Gemini
     ]
     
     # Crear el layout flotante

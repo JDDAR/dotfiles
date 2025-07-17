@@ -7,6 +7,9 @@ from libqtile.config import Key
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
+# Importar el workspace switcher con Tkinter
+from components.workspace import show_workspace_grid_tk
+
 # Configuración básica que necesitamos aquí
 mod = "mod4"  # Tecla Super/Windows
 terminal = guess_terminal()  # Detecta Alacritty automáticamente
@@ -29,6 +32,11 @@ def get_keys():
             lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/wallpaper_menu.sh")), 
             desc="Menú de selección de wallpapers"),
 
+        # ====== [WORKSPACE GRID] ======
+        Key([mod], "Tab",
+            lazy.function(show_workspace_grid_tk), 
+            desc="Mostrar workspace grid con Tkinter"),
+        
         # ====== [TERMINAL Y CONTROL BÁSICO] ======
         Key([mod], "Return", 
             lazy.spawn(terminal), 
@@ -106,10 +114,6 @@ def get_keys():
             desc="Resetear tamaños de ventanas"),
 
         # ====== [CONTROL DE LAYOUTS] ======
-        Key([mod], "Tab", 
-            lazy.next_layout(), 
-            desc="Alternar entre layouts"),
-        
         Key([mod], "t", 
             lazy.window.toggle_floating(), 
             desc="Alternar modo flotante"),
@@ -148,6 +152,11 @@ def get_keys():
         Key(["shift"], "Print", 
             lazy.spawn("flameshot full -p ~/Pictures/Screenshots/"), 
             desc="Captura de pantalla completa"),
+
+        # ====== [GEMINI CLI] ======
+        Key([mod], "g",
+            lazy.spawn(os.path.expanduser("~/.local/bin/gemini-launcher.sh")),
+            desc="Lanzar Gemini CLI en modo flotante"),
     ]
     
     return keys
